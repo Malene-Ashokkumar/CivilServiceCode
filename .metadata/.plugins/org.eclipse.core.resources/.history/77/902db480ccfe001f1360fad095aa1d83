@@ -1,0 +1,44 @@
+package stepDefinitions;
+
+import static org.testng.Assert.assertTrue;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.cucumber.java.en.*;
+import pages.HomePage;
+import pages.JobDetailsPage;
+import pages.JobListingPage;
+
+public class JobDetailListSteps {
+	
+	private WebDriver driver;
+    private HomePage homePage;
+    private JobListingPage jobListingPage;
+    private JobDetailsPage jobDetailsPage;
+
+    @Given("I navigate to the Civil Service Jobs website")
+    public void i_navigate_to_the_civil_service_jobs_website() {
+        driver = new ChromeDriver();
+        driver.get("https://www.civilservicejobs.service.gov.uk/csr/index.cgi");
+        homePage = new HomePage(driver);
+    }
+
+    @When("I select the department {string} from the filter options")
+    public void i_select_the_department_from_the_filter_options(String department) {
+        homePage.selectDepartment();
+    }
+
+    @When("I select the first available job listing")
+    public void i_select_the_first_available_job_listing() {
+        homePage.selectFirstJobListing();
+    }
+
+    @Then("I should see the number of jobs available on the job listing details page")
+    public void i_should_see_the_number_of_jobs_available_on_the_job_listing_details_page() {
+        jobListingPage = new JobListingPage(driver);
+        String jobCount = jobListingPage.getJobCount();
+        assertTrue("The job count should be a valid number", Integer.parseInt(jobCount) > 0);
+    }
+
+}

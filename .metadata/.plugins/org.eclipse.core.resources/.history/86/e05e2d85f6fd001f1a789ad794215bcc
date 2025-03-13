@@ -1,0 +1,41 @@
+package stepDefinitions;
+
+
+import io.cucumber.java.en.*;
+
+import java.time.Duration;
+import base.BaseTest;
+import pages.HomePage;
+import pages.SearchResultsPage;
+import org.testng.Assert;
+
+public class SearchJobSteps extends BaseTest {
+    private HomePage homePage;
+    private SearchResultsPage searchResultsPage;
+
+    @Given("I navigate to the Civil Service Jobs website")
+    public void iNavigateToTheWebsite() {
+        initializeDriver("chrome");
+        driver.get("https://www.civilservicejobs.service.gov.uk/csr/index.cgi");
+        homePage = new HomePage(driver);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+    }
+    
+    @When("I agree captcha and submit")
+    public void iCaptcha() {
+    	homePage.captcha();
+    }
+
+    @When("I search for {string} jobs in {string}")
+    public void iSearchForJobs(String title, String location) {
+        homePage.searchJob(title, location);
+    	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+    }
+
+ /*   @Then("I should see relevant job listings")
+    public void iShouldSeeRelevantJobs() {
+        searchResultsPage = new SearchResultsPage(driver);
+        Assert.assertTrue(searchResultsPage.validateSearchResults(), "No job listings found!");
+        quitDriver();
+    }*/
+}

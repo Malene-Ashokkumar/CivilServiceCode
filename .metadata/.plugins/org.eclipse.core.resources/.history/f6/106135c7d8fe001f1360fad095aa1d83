@@ -1,0 +1,23 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class JobListingPage {
+	
+	private WebDriver driver;
+
+    // Locator for the job listings and the job count
+    private By jobCount = By.xpath("//div[contains(@class, 'job-listing-count')]"); // Adjust for correct locator
+
+    public JobListingPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public String getJobCount() {
+        WebElement jobCountElement = driver.findElement(jobCount);
+        return jobCountElement.getText();
+    }
+
+}

@@ -1,0 +1,42 @@
+package pages;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class CivilServiceCodePage {
+	
+	private WebDriver Civildriver;
+	
+	private By careerAvailableLink = By.linkText("careers available in the Civil Service (opens in a new window)");
+    private By workingForCivilServiceLink = By.linkText("Working for the Civil Service");
+    private By civilServiceCodeLink = By.linkText("Civil Service Code");
+
+    public CivilServiceCodePage(WebDriver Civildriver) {
+        this.Civildriver = Civildriver;
+    }
+
+    public void clickCareerAvailable() {
+    	Civildriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+
+        WebElement link = Civildriver.findElement(careerAvailableLink);
+        link.click();
+    }
+    
+    public void clickOnWorkingForCivilService() {
+    	Civildriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+    	
+        WebElement link = Civildriver.findElement(workingForCivilServiceLink);
+        link.click();
+    }
+
+    public void clickOnCivilServiceCode() {
+    	Civildriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+
+        WebElement link = Civildriver.findElement(civilServiceCodeLink);
+        link.click();
+    }
+}
+

@@ -1,0 +1,6 @@
+Feature: Search for a Job on Civil Service Jobs Website
+
+  Scenario: Search for Analyst jobs in London
+    Given I navigate to the Civil Service Jobs website
+    When I agree captcha and submit
+    When I search for "Analyst" jobs in "London"

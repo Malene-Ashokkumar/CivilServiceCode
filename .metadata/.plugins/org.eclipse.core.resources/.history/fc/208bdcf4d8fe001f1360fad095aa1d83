@@ -1,0 +1,21 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class JobDetailsPage {
+	
+	private WebDriver driver;
+
+    // Locator for job details (e.g., number of jobs)
+    private By jobDetails = By.id("jobDetails"); // Adjust as necessary
+
+    public JobDetailsPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public String getJobDetails() {
+        return driver.findElement(jobDetails).getText();
+    }
+
+}

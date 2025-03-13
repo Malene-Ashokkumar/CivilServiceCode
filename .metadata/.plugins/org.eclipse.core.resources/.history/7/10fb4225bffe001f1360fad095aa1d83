@@ -1,0 +1,28 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.List;
+import java.util.Scanner;
+
+public class SearchResultsPage {
+    private WebDriver driver;
+    
+    System.out.println("Solve CAPTCHA manually and press Enter to continue...");
+    Scanner scanner = new Scanner(System.in);
+    scanner.nextLine(); 
+
+    
+    private By jobListings = By.xpath("//a[contains(text(), 'Analyst')]");
+
+    public SearchResultsPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public boolean validateSearchResults() {
+        List<WebElement> jobs = driver.findElements(jobListings);
+        return jobs.size() > 0;
+    }
+}
+

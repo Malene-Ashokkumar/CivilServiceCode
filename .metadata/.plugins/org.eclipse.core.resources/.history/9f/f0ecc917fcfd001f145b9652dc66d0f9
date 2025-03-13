@@ -1,0 +1,43 @@
+package stepDefinitions;
+
+import io.cucumber.java.en.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+
+import static org.junit.Assert.*;
+
+public class SearchJobSteps {
+    WebDriver driver;
+
+    @Given("I launch the Civil Service Jobs website")
+    public void launchWebsite() {
+        driver = new ChromeDriver(); // or use a WebDriverManager for better handling of drivers
+        driver.get("https://www.civilservicejobs.service.gov.uk/csr/index.cgi");
+    }
+
+    @When("I search for jobs with the title containing {string} in London")
+    public void searchJob(String title) {
+        // Find search elements (you may need to inspect the website for correct locators)
+        driver.findElement(By.id("search-keyword")).sendKeys(title);
+        driver.findElement(By.id("search-location")).sendKeys("London");
+        driver.findElement(By.id("search-button")).click();
+    }
+
+    @Then("I should see relevant job listings in London")
+    public void validateResults() {
+        // Assert that relevant results appear (you may need to adjust the validation logic)
+        String pageTitle = driver.getTitle();
+        assertTrue(pageTitle.contains("Analyst"));
+    }
+
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
+
+

@@ -1,0 +1,14 @@
+package stepDefinitions;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import io.cucumber.java.en.*;
+import pages.HomePage;
+import base.BaseTest;
+
+
+public class CivilServiceCodeSteps extends BaseTest{
+	    private WebDriver driver;
+	    private HomePage homePage;
+
+	    }

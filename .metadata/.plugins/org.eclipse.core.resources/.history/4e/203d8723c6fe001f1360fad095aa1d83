@@ -1,0 +1,42 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.List;
+import java.util.Scanner;
+
+public class SearchResultsPage {
+    private WebDriver driver;
+    
+    private By jobListings = By.xpath("//a[contains(text(), 'Analyst')]");
+    
+
+    public SearchResultsPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public boolean validateSearchResults() {
+    	
+ 	   System.out.println("Solve CAPTCHA manually and press Enter to continue...");
+       Scanner scanner = new Scanner(System.in);
+       scanner.nextLine();
+    	
+        List<WebElement> jobs = driver.findElements(jobListings);
+        
+        boolean relevantResults = true;
+
+        for (WebElement jobTitle : jobs) {
+            String titleText = jobTitle.getText();
+            System.out.println("Job Title Found: " + titleText);
+            
+            if (!titleText.toLowerCase().contains("Analyst")) {
+                relevantResults = false;
+                System.out.println("❌ Irrelevant job found: " + titleText);
+            }
+        } 
+        
+        return jobs.size() > 0;
+    }
+}
+

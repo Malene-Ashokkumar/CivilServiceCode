@@ -1,0 +1,21 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.List;
+
+public class SearchResultsPage {
+    private WebDriver driver;
+    private By jobListings = By.xpath("//a[contains(text(), 'Analyst')]");
+
+    public SearchResultsPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public boolean validateSearchResults() {
+        List<WebElement> jobs = driver.findElements(jobListings);
+        return jobs.size() > 0;
+    }
+}
+

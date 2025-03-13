@@ -1,0 +1,50 @@
+package stepDefinitions;
+
+package stepDefinitions;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import io.cucumber.java.en.*;
+import pages.HomePage;
+import pages.JobListingPage;
+import base.BaseTest;
+
+public class CivilServiceCodeSteps extends BaseTest {
+
+	    private WebDriver driver;
+	    private HomePage homePage;
+	    private JobListingPage jobListingPage;
+
+	    // Step for launching the Civil Service Jobs website
+	    @Given("I launch the Civil Service Jobs website")
+	    public void i_launch_the_civil_service_jobs_website() {
+	        driver.get("https://www.civilservicejobs.service.gov.uk/csr/index.cgi");
+	        homePage = new HomePage(driver);
+	    }
+
+	    // Step to click on "Working for the Civil Service"
+	    @When("I click on {string}")
+	    public void i_click_on(String linkName) {
+	        if(linkName.equals("Working for the Civil Service")) {
+	            homePage.clickOnWorkingForCivilService();
+	        } else if(linkName.equals("Civil Service Code")) {
+	            homePage.clickOnCivilServiceCode();
+	        }
+	    }
+
+	    // Step to validate the redirect (this assumes a specific section or title will appear after redirection)
+	    @Then("I should be redirected to the {string} section of the Civil Service Commission website")
+	    public void i_should_be_redirected_to_the_section_of_the_civil_service_commission_website(String sectionName) {
+	        // You can add a validation method here to verify if the correct section of the new page is loaded
+	        // For example, verifying the URL or checking the title of the page
+
+	        String currentUrl = driver.getCurrentUrl();
+	        Assert.assertTrue(currentUrl.contains("civil-service-commission"), "URL doesn't contain Civil Service Commission domain");
+
+	        // Verify if the section name is visible on the page
+	        Assert.assertTrue(driver.getPageSource().contains(sectionName), "The " + sectionName + " section is not present.");
+	    }
+	}
+
+
+}

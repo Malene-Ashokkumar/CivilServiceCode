@@ -1,0 +1,18 @@
+package stepDefinitions;
+
+public class Hooks {
+    @Before
+    public void setup() {
+        String browser = System.getProperty("browser", ConfigReader.getProperty("browser"));
+        DriverFactory.initDriver(browser);
+    }
+
+    @After
+    public void tearDown(Scenario scenario) {
+        if (scenario.isFailed()) {
+            byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", "Failed Screenshot");
+        }
+        DriverFactory.quitDriver();
+    }
+}

@@ -1,0 +1,26 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class JobListingPage {
+	
+	private WebDriver driver;
+
+    // Locator for the job listings and the job count
+    private By jobCount = By.xpath("//div[@class='csr-page-title']/h1[contains(text(), 'Search results')]");
+
+    public JobListingPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public String getJobCount() {
+    	
+    	String resultText = driver.findElement(jobCount).getText();
+    	String resultCount = resultText.replaceAll("[^0-9]", "");
+    	System.out.println("Number of search results: " + resultCount);
+		return resultCount;
+    }
+
+}

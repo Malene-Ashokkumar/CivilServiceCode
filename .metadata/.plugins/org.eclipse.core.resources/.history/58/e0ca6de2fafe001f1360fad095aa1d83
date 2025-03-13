@@ -1,0 +1,42 @@
+package pages;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import base.BaseTest;
+
+
+public class JobDetailsPage{
+	
+	private WebDriver driver;
+    private By departmentFilter = By.xpath("//button[@id = 'oselect_title_517a']");
+    private By departmentTextBox = By.xpath("//input[@id = 'oselect_input_5179']");
+    private By departmentOption = By.xpath("//label[text()='Medicines and Healthcare Products Regulatory Agency']");
+    private By updateResult = By.xpath("//input[@id ='submitSearchUpdate' ]");
+    private By firstJobListing = By.xpath("((//h3[@class='search-results-job-box-title']/a)[1]");
+	
+    
+    public JobDetailsPage(WebDriver driver) {
+        this.driver = driver;
+    }
+    
+    public void selectDepartment(String departmentName) {
+    	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+    	
+    	driver.findElement(departmentFilter).click();
+    	driver.findElement(departmentTextBox).sendKeys(departmentName);
+    	driver.findElement(departmentOption).click();
+    	driver.findElement(updateResult).click();
+    	
+    	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+    }
+
+    public void selectFirstJobListing() {
+        WebElement firstJob = driver.findElement(firstJobListing);
+        firstJob.click();
+    }
+
+}

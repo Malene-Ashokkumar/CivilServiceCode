@@ -1,0 +1,37 @@
+package utils;
+
+public class DriverFactory {
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+    public static WebDriver getDriver() {
+        return driver.get();
+    }
+
+    public static void initDriver(String browser) {
+        WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.edgedriver().setup();
+
+        switch (browser.toLowerCase()) {
+            case "firefox":
+                driver.set(new FirefoxDriver());
+                break;
+            case "edge":
+                driver.set(new EdgeDriver());
+                break;
+            default:
+                driver.set(new ChromeDriver());
+        }
+
+        getDriver().manage().window().maximize();
+        getDriver().get(ConfigReader.getProperty("url"));
+    }
+
+    public static void quitDriver() {
+        if (getDriver() != null) {
+            getDriver().quit();
+            driver.remove();
+        }
+    }
+}
+

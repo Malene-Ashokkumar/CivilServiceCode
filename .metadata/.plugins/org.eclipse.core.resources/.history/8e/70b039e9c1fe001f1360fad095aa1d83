@@ -1,0 +1,36 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.List;
+
+public class SearchResultsPage {
+    private WebDriver driver;
+    
+    private By jobListings = By.xpath("//a[contains(text(), 'Analyst')]");
+    
+
+    public SearchResultsPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public boolean validateSearchResults() {
+        List<WebElement> jobs = driver.findElements(jobListings);
+        
+        boolean relevantResults = true;
+
+        for (WebElement jobTitle : jobs) {
+            String titleText = jobTitle.getText();
+            System.out.println("Job Title Found: " + titleText);
+            
+            if (!titleText.toLowerCase().contains("Analyst")) {
+                relevantResults = false;
+                System.out.println("❌ Irrelevant job found: " + titleText);
+            }
+        } 
+        
+        return jobs.size() > 0;
+    }
+}
+

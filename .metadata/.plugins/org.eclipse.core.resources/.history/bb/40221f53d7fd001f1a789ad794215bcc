@@ -1,0 +1,21 @@
+package pages;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.WebDriver;
+
+public class JobDetailsPage {
+	
+	    public static void handleAlert(WebDriver driver) {
+	        try {
+	            // Switch to alert and accept/dismiss it
+	            Alert alert = driver.switchTo().alert();
+	            System.out.println("Alert Text: " + alert.getText());
+	            alert.accept(); // Use dismiss() if you want to cancel the alert
+	            System.out.println("Unexpected alert accepted.");
+	        } catch (NoAlertPresentException e) {
+	            System.out.println("No alert present.");
+	        }
+	    }
+}

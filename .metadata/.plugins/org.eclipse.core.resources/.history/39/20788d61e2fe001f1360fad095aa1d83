@@ -1,0 +1,33 @@
+package stepDefinitions;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+
+import io.cucumber.java.en.*;
+import pages.HomePage;
+import pages.JobListingPage;
+
+public class JobDetailListSteps {
+	
+	private WebDriver driver;
+    private HomePage homePage;
+    private JobListingPage jobListingPage;
+
+    @When("I select the department {string} from the filter options")
+    public void i_select_the_department_from_the_filter_options(String departmentName) {
+        homePage.selectDepartment(departmentName);
+    }
+
+    @When("I select the first available job listing")
+    public void i_select_the_first_available_job_listing() {
+        homePage.selectFirstJobListing();
+    }
+
+    @Then("I should see the number of jobs available on the job listing details page")
+    public void i_should_see_the_number_of_jobs_available_on_the_job_listing_details_page() {
+        jobListingPage = new JobListingPage(driver);
+        String jobCount = jobListingPage.getJobCount();
+        Assert.assertTrue(Integer.parseInt(jobCount) > 0, "The job count should be a valid number");
+    }
+
+}

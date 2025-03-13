@@ -1,0 +1,28 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class CivilServiceCodePage {
+
+    private WebDriver driver;
+
+    // Locators
+    private By workingForCivilServiceLink = By.linkText("Working for the Civil Service");
+    private By civilServiceCodeLink = By.linkText("Civil Service Code");
+
+    // Constructor to initialize WebDriver
+    public CivilServiceCodePage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    // Click on "Working for the Civil Service"
+    public void clickOnWorkingForCivilService() {
+        driver.findElement(workingForCivilServiceLink).click();
+    }
+
+    // Click on "Civil Service Code"
+    public void clickOnCivilServiceCode() {
+        driver.findElement(civilServiceCodeLink).click();
+    }
+}

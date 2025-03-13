@@ -1,0 +1,44 @@
+package stepDefinitions;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import io.cucumber.java.en.*;
+import pages.CivilServiceCodePage;
+import base.BaseTest;
+import pages.HomePage;
+
+
+public class CivilServiceCodeSteps extends BaseTest {
+        private HomePage homePage;
+	    private WebDriver Civildriver;
+	    private CivilServiceCodePage civilServiceCodePage;
+
+	    @When("I click on {string}")
+	    public void i_click_on(String linkName) {
+	    	
+	    	if(linkName.equals("Career Available in the Civil Service")) {
+	    		civilServiceCodePage.clickCareerAvailable();
+	    		
+	    	} else if(linkName.equals("Working for the Civil Service")) {
+	    	civilServiceCodePage.clickOnWorkingForCivilService();
+	    	
+	        } else if(linkName.equals("Civil Service Code")) {
+	        	civilServiceCodePage.clickOnCivilServiceCode();
+	        	
+	        } else {
+	        	
+	        	System.out.println("No link identified");
+	        }
+	    }
+	    
+
+	    @Then("I should be redirected to the {string} section of the Civil Service Commission website")
+	    public void i_should_be_redirected_to_the_section_of_the_civil_service_commission_website(String sectionName) {
+
+	        String currentUrl = Civildriver.getCurrentUrl();
+	        Assert.assertTrue(currentUrl.contains("civilservicecommission"), "URL doesn't contain Civil Service Commission domain");
+
+	        Assert.assertTrue(Civildriver.getPageSource().contains(sectionName), "The " + sectionName + " section is not present.");
+	        quitDriver();
+	    }
+}
